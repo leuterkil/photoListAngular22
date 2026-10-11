@@ -1,3 +1,18 @@
-:host { display: block; position: relative; }
-img { display: block; width: 100%; height: auto; }
-.photo-fab { position: absolute; bottom: 16px; left: 16px; }
+:host {
+     display: block; 
+     position: relative;
+     img { 
+        display: block; 
+        width: 100%; 
+        height: auto; 
+    }
+    .photo-fab { 
+        position: absolute;
+         bottom: 16px;
+          left: 16px; 
+        }
+    .photo-fab.is-favorite ::ng-deep .mat-icon {
+         color: #e53935; font-variation-settings: 'FILL' 1; 
+        }
+ }
+
