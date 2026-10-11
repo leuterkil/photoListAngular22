@@ -1,8 +1,9 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { AppButtonComponent } from './shared/components/app-button/app-button.component';
 
 @Component({
-  imports: [RouterOutlet],
+  imports: [RouterOutlet,AppButtonComponent,RouterLink, RouterLinkActive],
   selector: 'app-root',
   styleUrl: './app.scss',
   templateUrl: './app.html',

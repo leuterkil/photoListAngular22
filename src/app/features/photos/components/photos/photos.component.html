@@ -1,0 +1,17 @@
+<div class="photo-grid">
+        @for (item of list(); track item.id) {
+            <photo-card [photo]="item"></photo-card>
+        }
+        @if (fetching()) {
+            @for (_ of skeletons; track $index) {
+                <photo-skeleton></photo-skeleton>
+            }
+        }
+</div>
+@if (loadingMore()) {
+    <div class="loading">
+        <mat-spinner diameter="32"></mat-spinner>
+        <span>Loading...</span>
+    </div>
+}
+<div infiniteScroll [scrollDisabled]="loading() || !hasMore()" (infiniteScroll)="loadMore()"></div>

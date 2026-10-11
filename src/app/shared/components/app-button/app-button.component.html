@@ -1,0 +1,27 @@
+@if(!text()){
+<button matMiniFab>
+    @if(preffixIcon()){
+        <mat-icon>{{preffixIcon()}}</mat-icon>
+    }
+    @if(suffixIcon() && !loading()){
+        <mat-icon iconPositionEnd>{{suffixIcon()}}</mat-icon>
+    }
+    @if(loading()){
+        <mat-icon iconPositionEnd>spinner</mat-icon>
+    }
+</button>
+}
+@else{
+    <button [matButton]="type()">
+    @if(preffixIcon()){
+        <mat-icon>{{preffixIcon()}}</mat-icon>
+    }
+    {{text()}}
+    @if(suffixIcon() && !loading()){
+        <mat-icon iconPositionEnd>{{suffixIcon()}}</mat-icon>
+    }
+    @if(loading()){
+        <mat-icon iconPositionEnd>spinner</mat-icon>
+    }
+</button>
+}

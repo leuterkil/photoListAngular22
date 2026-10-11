@@ -1,0 +1,11 @@
+:host{
+    .photo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    .loading{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-block-start: 24px;
+        align-items: center;
+        gap: 12px;
+    }
+}
