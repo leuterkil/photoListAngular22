@@ -25,7 +25,7 @@ function save(photos: Photo[]): void {
 
 export const FavoritesStore = signalStore(
     { providedIn: 'root' },
-    withState({ photos: load() }),
+    withState(() => ({ photos: load() })),
     withComputed(store => ({
         ids: computed(() => new Set(store.photos().map(photo => photo.id))),
     })),

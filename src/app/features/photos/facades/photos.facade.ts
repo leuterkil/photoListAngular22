@@ -5,13 +5,20 @@ import { catchError, delay, map, Observable, tap, throwError } from "rxjs";
 import { Photo } from "../../../core/types/photo.types";
 import { PhotosResponse } from "../types/photos-response.type";
 
+const LIST_URL = "https://picsum.photos/v2/list"
+// The list holds ~1,000 photos (about 120 pages of 9). Starting no later than this page
+// leaves plenty of pages to scroll through after a random start.
+const MAX_START_PAGE = 100
+
 @Injectable()
 export class PhotosFacade{
     private readonly _service = inject(PhotosService)
     public readonly store = inject(PhotosStore)
 
     public index$():Observable<Photo[]>{
-        const url: string = this.store.nextUrl() ?? "https://picsum.photos/v2/list"
+        // First load starts at a random page; scrolling continues from there.
+        const page: number = this.store.nextUrl() ? (this.store.page() ?? 0) + 1 : Math.floor(Math.random() * MAX_START_PAGE) + 1
+        const url: string = `${LIST_URL}?page=${page}`
         this.store.setLoadingState()
         return this._service.index$(url).pipe(delay(200 + Math.random() * 100),map((response: PhotosResponse[]): Photo[] => response.map(picSumPhoto=>{
             const id = encodeURIComponent(picSumPhoto.id)
@@ -24,7 +31,7 @@ export class PhotosFacade{
                 author: picSumPhoto.author
             }
         })),tap((photos: Photo[]): void =>{
-            this.store.setFeed(photos)
+            this.store.setFeed(photos, page)
         }),catchError((error: unknown)=>{
             this.store.setError(error instanceof Error ? error.message : "Failed to load photos")
             return throwError(()=>error)

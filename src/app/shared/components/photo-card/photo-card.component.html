@@ -1,5 +1,5 @@
 @if (navigable()) {
-    <a [routerLink]="['/photo', photo().id]">
+    <a [routerLink]="['/photos', photo().id]">
         <img [src]="photo().url" [alt]="'Photograph by ' + photo().author" loading="lazy" width="600" height="750">
     </a>
 } @else {

@@ -15,7 +15,7 @@ export const routes: Routes = [
         loadComponent: () => import('./features/favorites/components/favorites/favorites.component').then(m => m.FavoritesComponent)
     },
     {
-        path: 'photo/:id',
+        path: 'photos/:id',
         title: 'Photo | Stillframe',
         canActivate: [favoritePhotoGuard],
         loadComponent: () => import('./features/specific-photo/components/specific-photo/specific-photo.component').then(m => m.SpecificPhotoComponent)
