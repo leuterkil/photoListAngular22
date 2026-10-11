@@ -6,8 +6,7 @@ import { Photo } from "../../../core/types/photo.types";
 import { PhotosResponse } from "../types/photos-response.type";
 
 const LIST_URL = "https://picsum.photos/v2/list"
-// The list holds ~1,000 photos (about 120 pages of 9). Starting no later than this page
-// leaves plenty of pages to scroll through after a random start.
+
 const MAX_START_PAGE = 100
 
 @Injectable()

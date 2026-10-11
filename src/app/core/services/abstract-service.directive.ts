@@ -1,6 +1,6 @@
 import { HttpClient, HttpClientCommonOptions, HttpRequestOptions } from "@angular/common/http";
 import { inject } from "@angular/core";
-import { Observable, OperatorFunction, switchMap } from "rxjs";
+import { OperatorFunction, switchMap } from "rxjs";
 
 type GetOptions = Omit<HttpClientCommonOptions, 'observe' | 'responseType'>;
 
