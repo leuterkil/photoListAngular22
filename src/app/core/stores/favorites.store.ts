@@ -1,19 +1,23 @@
-import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
+import { computed } from '@angular/core';
+import { Photo } from '../types/photo.types';
 
 const STORAGE_KEY = "photolist.favorites";
 
-function load(): string[] {
+
+
+function load(): Photo[] {
     try {
-        const parsed: unknown = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "[]");
-        return Array.isArray(parsed) ? parsed.filter((id): id is string => typeof id === "string") : [];
+        const parsed: Photo[] = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "[]");
+        return parsed;
     } catch {
         return [];
     }
 }
 
-function save(ids: string[]): void {
+function save(photos: Photo[]): void {
     try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(ids));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(photos));
     } catch {
         // storage unavailable: favorites stay in memory only
     }
@@ -21,14 +25,17 @@ function save(ids: string[]): void {
 
 export const FavoritesStore = signalStore(
     { providedIn: 'root' },
-    withState({ ids: load() }),
+    withState({ photos: load() }),
+    withComputed(store => ({
+        ids: computed(() => new Set(store.photos().map(photo => photo.id))),
+    })),
     withMethods(store => ({
-        toggle(id: string): void {
-            const ids = store.ids().includes(id)
-                ? store.ids().filter(favoriteId => favoriteId !== id)
-                : [...store.ids(), id];
-            patchState(store, { ids });
-            save(ids);
+        toggle(photo: Photo): void {
+            const photos = store.ids().has(photo.id)
+                ? store.photos().filter(favorite => favorite.id !== photo.id)
+                : [...store.photos(), photo];
+            patchState(store, { photos });
+            save(photos);
         },
     })),
 );

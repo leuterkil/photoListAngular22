@@ -35,7 +35,6 @@ export class PhotosComponent implements OnInit{
 
     public readonly fetching = computed(() => this._facade.store.loadingState() === LoadingStateType.FETCHING);
     public readonly loadingMore = computed(() => this._facade.store.loadingState() === LoadingStateType.LOAD_MORE);
-    public readonly loading = computed(() => this.fetching() || this.loadingMore());
     public readonly skeletons = Array(6);
     public list!: Signal<Photo[]>;
     public hasMore!: Signal<boolean>;
@@ -49,7 +48,7 @@ export class PhotosComponent implements OnInit{
     }
 
     public loadMore(): void{
-        if (this.loading() || !this.hasMore()) return;
+        if (this.loadingMore() || !this.hasMore()) return;
         this._indexSubject.next();
     }
 

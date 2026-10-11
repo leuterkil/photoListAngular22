@@ -1,0 +1,7 @@
+<section class="specific-photo">
+    @if (photo(); as photo) {
+        <img [src]="largeUrl(photo.id)" [alt]="'Photograph by ' + photo.author" width="1600" height="900">
+        <p class="author">Photograph by {{photo.author}}</p>
+        <app-button type="outlined" preffixIcon="favorite" text="Remove from favorites" (click)="removeFavorite()"></app-button>
+    }
+</section>

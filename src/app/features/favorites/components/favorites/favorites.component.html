@@ -1,0 +1,8 @@
+<div class="photo-grid">
+        @for (item of list(); track item.id) {
+            <photo-card [photo]="item" [navigable]="true"></photo-card>
+        }
+</div>
+@if (list().length === 0) {
+    <p class="empty">No favorites yet. Tap the heart on a photo to add it here.</p>
+}

@@ -1,0 +1,4 @@
+:host{
+    .photo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    .empty { text-align: center; margin-block-start: 24px; }
+}

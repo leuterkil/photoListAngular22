@@ -1,2 +1,8 @@
-<img [src]="photo().url" [alt]="'Photograph by ' + photo().author" loading="lazy" width="600" height="750">
+@if (navigable()) {
+    <a [routerLink]="['/photo', photo().id]">
+        <img [src]="photo().url" [alt]="'Photograph by ' + photo().author" loading="lazy" width="600" height="750">
+    </a>
+} @else {
+    <img class="toggleable" [src]="photo().url" [alt]="'Photograph by ' + photo().author" loading="lazy" width="600" height="750" (click)="toggleFavorite()">
+}
 <app-button class="photo-fab" [class.is-favorite]="isFavorite()" [attr.aria-pressed]="isFavorite()" preffixIcon="favorite" (click)="toggleFavorite()"></app-button>

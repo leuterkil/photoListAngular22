@@ -14,4 +14,4 @@
         <span>Loading...</span>
     </div>
 }
-<div infiniteScroll [scrollDisabled]="loading() || !hasMore()" (infiniteScroll)="loadMore()"></div>
+<div infiniteScroll [scrollDisabled]="loadingMore() || !hasMore()" (infiniteScroll)="loadMore()"></div>
