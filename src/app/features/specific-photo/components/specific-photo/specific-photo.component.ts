@@ -19,11 +19,6 @@ export class SpecificPhotoComponent{
 
     public readonly photo = this._facade.photo;
 
-    // The stored url is the 600x750 card crop; request a larger 16:9 render for this page.
-    public largeUrl(id: string): string {
-        return `https://picsum.photos/id/${encodeURIComponent(id)}/1600/900`
-    }
-
     public removeFavorite(): void {
         this._facade.removeFavorite();
     }
