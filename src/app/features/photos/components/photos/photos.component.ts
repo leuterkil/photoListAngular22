@@ -1,3 +1,4 @@
+import { ScrollToTopComponent } from "../../../../shared/components/scroll-to-top/scroll-to-top.component";
 import { Component, computed, inject, OnInit, Signal } from "@angular/core";
 import { catchError, EMPTY, Observable, Subject, Subscription, switchMap, takeUntil } from "rxjs";
 import { PhotosFacade } from "../../facades/photos.facade";
@@ -14,7 +15,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     selector:"photos",
     templateUrl:"./photos.component.html",
     styleUrls:["./photos.component.scss"],
-    imports:[PhotoCardComponent,PhotoSkeletonComponent,InfiniteScrollDirective,MatProgressSpinnerModule],
+    imports:[ScrollToTopComponent,PhotoCardComponent,PhotoSkeletonComponent,InfiniteScrollDirective,MatProgressSpinnerModule],
     providers:[PhotosService,PhotosFacade,PhotosStore]
 })
 export class PhotosComponent implements OnInit{

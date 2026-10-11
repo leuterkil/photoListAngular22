@@ -131,4 +131,8 @@ describe('PhotosComponent', () => {
     FakeIntersectionObserver.scrollToEnd();
     expect(index$).toHaveBeenCalledTimes(1);
   });
+
+  it('offers a scroll-to-top button', () => {
+    expect(el().querySelector('scroll-to-top')).not.toBeNull();
+  });
 });

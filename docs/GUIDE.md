@@ -108,6 +108,7 @@ src/
       app-button/            Material button wrapper
       photo-card/            photo + heart, favorite toggle / navigate
       photo-skeleton/        shimmer placeholder
+      scroll-to-top/         floating back-to-top button
     testing/photo.factory.ts test helper (makePhoto)
 docs/GUIDE.md                this file
 ```
@@ -298,6 +299,14 @@ A thin wrapper over Angular Material. No `text` → icon-only `matMiniFab`; with
 (`type` input = appearance, default `filled`). Inputs: `text`, `preffixIcon`, `suffixIcon`, `loading`,
 `type`. (The `preffix` spelling is the existing public name — keep it consistent.)
 
+### `ScrollToTopComponent` (`shared/components/scroll-to-top`)
+
+A `matMiniFab` pinned bottom-right (`position: fixed`). It listens to `window:scroll` through the
+component `host` metadata, and a `visible` signal is true once `window.scrollY` exceeds the `threshold`
+input (default 400 px). Clicking calls `window.scrollTo({ top: 0, behavior })`, using `smooth` unless the
+user prefers reduced motion. It is placed at the end of the Photos and Favorites templates only (the single
+photo page does not need it). It has `aria-label="Scroll to top"`.
+
 ### `PhotoSkeletonComponent` (`shared/components/photo-skeleton`)
 
 Shimmer placeholder with the same 600/750 aspect ratio as a card and a placeholder for the heart.
@@ -363,7 +372,7 @@ Run: `npm test` (watch) or `npx ng test --watch=false` (CI). Runner: Vitest thro
 `@angular/build:unit-test`, jsdom. `describe/it/expect` are global; import `vi` only if you need it
 (it is also global in this setup).
 
-Current suite: **12 files, 66 tests**.
+Current suite: **13 files, 75 tests**.
 
 | Spec | What it proves |
 | --- | --- |
@@ -379,6 +388,7 @@ Current suite: **12 files, 66 tests**.
 | `photo-card.component.spec.ts` | Alt text, favorite state, heart toggle, photo-click toggle vs. navigate, heart outside the link. |
 | `app-button.component.spec.ts` | Text button vs. mini fab, icons, loading spinner swap. |
 | `photo-skeleton.component.spec.ts` | Placeholders render. |
+| `scroll-to-top.component.spec.ts` | Hidden at top, shows past the threshold (custom threshold too), hides again, smooth scroll vs. reduced motion. jsdom lacks `scrollTo`/`matchMedia`, so they are stubbed with `vi.stubGlobal`. |
 
 ### Techniques used (reuse them)
 
@@ -492,6 +502,7 @@ instead of branching on route; keep it presentational.
 | Angular Router, latest Angular, SCSS, Angular Material | Done |
 | Infinite scroll implemented without libraries | Done (`InfiniteScrollDirective`) |
 | No backend for state | Done |
-| Unit tests | Done (66 tests) |
+| Unit tests | Done (75 tests) |
+| Scroll-to-top on the photo and favorites lists | Done (`ScrollToTopComponent`) |
 | Reusable components / sensible structure | Done (`shared/`, `core/`, `features/`) |
 | README with run instructions | Done |

@@ -47,4 +47,8 @@ describe('FavoritesComponent', () => {
     expect(el().querySelectorAll('photo-card').length).toBe(0);
     expect(el().querySelector('.empty')).not.toBeNull();
   });
+
+  it('offers a scroll-to-top button', () => {
+    expect(el().querySelector('scroll-to-top')).not.toBeNull();
+  });
 });

@@ -1,3 +1,4 @@
+import { ScrollToTopComponent } from "../../../../shared/components/scroll-to-top/scroll-to-top.component";
 import { Component, inject } from "@angular/core";
 import { PhotoCardComponent } from "../../../../shared/components/photo-card/photo-card.component";
 import { FavoritesFacade } from "../../facades/favorites.facade";
@@ -6,7 +7,7 @@ import { FavoritesFacade } from "../../facades/favorites.facade";
     selector:"favorites",
     templateUrl:"./favorites.component.html",
     styleUrls:["./favorites.component.scss"],
-    imports:[PhotoCardComponent],
+    imports:[ScrollToTopComponent,PhotoCardComponent],
     providers:[FavoritesFacade]
 })
 export class FavoritesComponent{
