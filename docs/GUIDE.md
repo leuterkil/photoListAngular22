@@ -372,7 +372,7 @@ Run: `npm test` (watch) or `npx ng test --watch=false` (CI). Runner: Vitest thro
 `@angular/build:unit-test`, jsdom. `describe/it/expect` are global; import `vi` only if you need it
 (it is also global in this setup).
 
-Current suite: **13 files, 75 tests**.
+Current suite: **15 files, 89 tests**.
 
 | Spec | What it proves |
 | --- | --- |
@@ -380,6 +380,8 @@ Current suite: **13 files, 75 tests**.
 | `favorites.store.spec.ts` | Toggle add/remove, `ids` set, persistence on every change, restore on load, corrupt JSON fallback, write errors tolerated. |
 | `photos.store.spec.ts` | First page → `?page=2`; **continues from a random start page**; later pages append and advance (`3`, `4`…); short page stops pagination; loading states; error clears loading. |
 | `photos.facade.spec.ts` | Random start page (1…100) and continuation from it, FETCHING/LOAD_MORE, **200 ms minimum / 300 ms maximum delay** (fake timers + mocked `Math.random`), response → `Photo` mapping incl. `largeUrl`, store update, error handling. |
+| `favorites.facade.spec.ts` | Exposes the shared root store, starts empty, reflects favorites added elsewhere, restores saved favorites. |
+| `specific-photo.facade.spec.ts` | `photo` follows the route id and the favorites; `removeFavorite` removes, persists, navigates to `/favorites`, keeps the others, and does nothing for a non-favorite. |
 | `infinite-scroll.directive.spec.ts` | Observes with root margin, emits only when intersecting, stops while disabled, **re-observes on re-enable**, rebuilds on margin change, disconnects on destroy. |
 | `favorite-photo.guard.spec.ts` | Allows favorites; redirects to `/` otherwise or when id missing. |
 | `photos.component.spec.ts` | First request on init, skeletons, cards, spinner on scroll, **no concurrent requests**, append, stops at the last page. |
@@ -502,7 +504,7 @@ instead of branching on route; keep it presentational.
 | Angular Router, latest Angular, SCSS, Angular Material | Done |
 | Infinite scroll implemented without libraries | Done (`InfiniteScrollDirective`) |
 | No backend for state | Done |
-| Unit tests | Done (75 tests) |
+| Unit tests | Done (89 tests) |
 | Scroll-to-top on the photo and favorites lists | Done (`ScrollToTopComponent`) |
 | Reusable components / sensible structure | Done (`shared/`, `core/`, `features/`) |
 | README with run instructions | Done |
